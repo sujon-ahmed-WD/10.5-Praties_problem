@@ -36,24 +36,38 @@ void print(Node *head)
     }
     cout << endl;
 }
-// string isSame(Node*head,Node*head1)
-// {
 
- 
-      
-
-// }
-
-int size(Node*head)
+int size(Node *head)
 {
-    int sz=0;
-    Node*temp=head;
-    while(temp!=nullptr)
+    int sz = 0;
+    Node *temp = head;
+    while (temp != nullptr)
     {
         sz++;
-        temp=temp->next;
+        temp = temp->next;
     }
     return sz;
+}
+bool sameornot(Node *head, Node *head1)
+{
+    Node *temp1 = head;
+    Node *temp2 = head1;
+    int len1 = size(head);
+    int len2 = size(head1);
+    if (len1 != len2)
+    {
+        return false;
+    }
+    for (int i = 0; i < len1; i++)
+    {
+        if (temp1->val != temp2->val)
+        {
+            return false;  
+        }
+        temp1=temp1->next;
+        temp2=temp2->next;
+    }
+    return true;
 }
 int main()
 {
@@ -67,14 +81,21 @@ int main()
     {
         set_list(head, tail, x);
     }
-    int len1=size(head);
-     
 
     int y;
     while (cin >> y && y != -1)
     {
         set_list(head1, tail1, y);
     }
-    int len2=size(head1);
+
+    if (sameornot(head, head1))
+    {
+        cout << "YES";
+    }
+    else
+    {
+        cout << "NO";
+    }
+
     return 0;
 }
