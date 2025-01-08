@@ -23,9 +23,11 @@ void at_head(Node *&head, Node *&tail, int val)
         tail = newnode;
         return;
     }
-    head->next = newnode;
-    newnode->prev = head;
-    head = newnode;
+    newnode->next=head;
+    head->prev=newnode;
+    head=newnode;
+    
+ 
 }
 void at_tail(Node *&head, Node *&tail, int val)
 {
@@ -36,16 +38,16 @@ void at_tail(Node *&head, Node *&tail, int val)
         tail = newnode;
         return;
     }
-    tail->next=newnode;
-    newnode->prev=tail;
-    tail=newnode;
+    tail->next = newnode;
+    newnode->prev = tail;
+    tail = newnode;
 }
 
 void any_pos(Node *&head, Node *&tail, int idx, int val)
 {
     Node *newnode = new Node(val);
     Node *temp = head;
-    for (int i = 0; i < idx; i++)
+    for (int i = 1; i < idx; i++)
     {
         temp = temp->next;
     }
@@ -71,8 +73,8 @@ void backword_print(Node *tail)
     Node *temp = tail;
     while (temp != NULL)
     {
-        cout << tail->val;
-        temp = tail->prev;
+        cout << temp->val << " ";
+        temp = temp->prev;
     }
     cout << endl;
 }
@@ -106,20 +108,26 @@ int main()
         {
             at_head(head, tail, val);
             froword_print(head);
-            backword_print(head);
+            backword_print(tail);
         }
-        else if (idx == 1)
+        
+        else if (idx == len)
         {
-          at_tail(head,tail,val);
+            at_tail(head, tail, val);
             froword_print(head);
-            backword_print(head);
+            backword_print(tail);
         }
+
         else if (len < idx)
         {
             cout << "Invalid" << endl;
-             
         }
-        
+        else
+        {
+            any_pos(head, tail, idx, val);
+            froword_print(head);
+            backword_print(tail);
+        }
     }
     return 0;
 }
